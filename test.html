@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <canvas id="canvas1" width="1201" height="800">
+  </canvas> -->
+
+  <div style="position: relative;margin: 20px auto;">
+    <img class="img1" style="position: absolute;width: 10px;height: 10px;left: 0;top:0px" src="./src/babyEye0.png"
+      alt="">
+    <img class="img2" style="position: absolute;width: 10px;height: 10px;left: 0;top:0px" src="./src/babyEye1.png"
+      alt="">
+  </div>
+  <script>
+    // let can = document.getElementById('canvas1');
+    // let ctx = can.getContext('2d');
+    // let canWidth = can.width;
+    // let canHeight = can.height;
+
+    // console.log('canWidth', canWidth);
+    // console.log('canHeight', canHeight);
+
+    // function canDrawImage(url, callback) {
+    //   let img = new Image();
+    //   img.src = url;
+
+    //   img.onload = function() {
+    //     callback(img);
+    //   }
+
+    //   return img;
+    // }
+    // // let imgBack = new Image();
+    // // imgBack.src = './src/background.jpg';
+    // // imgBack.onload = function() {
+    // //   ctx.drawImage(imgBack, 0, 0, canWidth, canHeight);
+    // // }
+    // let img1 = canDrawImage('./src/background.jpg', function(img) {
+    //   // ctx.drawImage(img, 0, 0, canWidth, canHeight);
+    // })
+
+    // // 623 * 526
+    // let img2 = canDrawImage('./imgs/boat.png', function(img) {
+    //   // ctx.drawImage(img, 0, 40, 623, 526);
+    // })
+
+    // window.requestAnimFrame = (function() {
+    //   return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+    //     function( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+    //       return window.setTimeout(callback, 1000 / 60);
+    //     };
+    // })();
+    // // let arrX = [620, 617, 614, 611, 609, 606, 603, 600];
+    // // let arrY = [526, 531, 534, 537, 540, 543, 546, 649];
+    // let w = canWidth;
+    // let h = canHeight;
+    // let index = 0;
+    // // window.requestAnimationFrame(function() {
+    // //   console.log(1111)
+    // //   ctx.drawImage(img1, 0, 0, canWidth, canHeight);
+    // //   // ctx.drawImage(img, 0, 40, 623, 526);
+    // //   ctx.drawImage(img2, 0, 40, arrX[index], arrY[index]);
+    // //   index++;
+    // //   if (index >= arrX.length) {
+    // //     index = 0;
+    // //   }
+    // // })
+    // let flag = true;
+    // let y = 40;
+    // function fun() {
+    //   console.log(1111)
+    //   window.requestAnimFrame(fun);
+    //   ctx.drawImage(img1, 0, 0, canWidth, canHeight);
+    //   // ctx.drawImage(img, 0, 40, 623, 526);
+    //   // index++;
+    //   // if (index >= arrX.length) {
+    //   //   index = 0;
+    //   // }
+    //   if (flag) {
+    //     ctx.drawImage(img2, 0, y--, w--, h++);
+    //     // w = canWidth;
+    //     // h = canHeight;
+    //   } else {
+    //     ctx.drawImage(img2, 0, y++, w++, h--);
+    //   }
+
+    //   if(canWidth - w >= 60) {
+    //     flag = false;
+    //   } 
+
+    //   if(canWidth - w <= -30) {
+    //     flag = true;
+    //   }
+    // }
+    // // fun();
+
+    let img1Dom = document.querySelector('.img1');
+    let img2Dom = document.querySelector('.img2');
+
+    // setInterval(() => {
+    //   img1Dom.style.display = 'none';
+    //   img2Dom.style.display = 'block';
+    // }, 3000);
+    // setInterval(() => {
+    //   img1Dom.style.display = 'block';
+    //   img2Dom.style.display = 'none';
+    // }, 200);
+
+    let timeArr = [2000, 200];
+    let timeCount = 0;
+
+    function inter() {
+      setTimeout(() => {
+        timeCount = ++timeCount % 2;
+        if (timeCount == 0) {
+          img1Dom.style.display = 'block';
+          img2Dom.style.display = 'none';
+        } else {
+          img1Dom.style.display = 'none';
+          img2Dom.style.display = 'block';
+        }
+        inter();
+      }, timeArr[timeCount]);
+    }
+
+    inter();
+
+  </script>
+</body>
+
+</html>

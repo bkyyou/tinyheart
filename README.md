@@ -36,7 +36,7 @@
 
 ```js
 ctx2.save();
-	ctx2.globalAlpha = 0.6;
+ctx2.globalAlpha = 0.6;
 for (let i = 0; i < this.num; i++) {
   // beginPath moveTo lineTo storke strokeStyle lineWidth lineCap globalAlpha
   // console.log('ctx2', ctx2);
@@ -57,5 +57,34 @@ ctx2.restore();
 
 * clearRect()
 
+## 设置文字
+
+* fillText()
+
+```js
+ctx1.fillText('source:' + this.source, canWidth / 2, canHeight - 50);
+```
+
+* 设置字体样式
+
+```js
+ctx1.shadowBlur = 10;
+ctx1.shadowColor = 'white';
+ctx1.fillStyle = 'white' || 'rgba()';
+ctx1.font = '30px Verdana';
+ctx1.textAlign = 'center'; // center right left
+ctx1.fillText('GAMEOVER', canWidth / 2, canHeight / 2);
+```
+
+* 画圆
+
+```js
+ctx.lineWidth = 5;
+ctx.beginPath();
+ctx.arc(x , y , r , 0, 2 * Math.PI, fasle);  // 位置，半径， 弧度， 方向（顺时针还是逆时针）
+ctx.closePath();
+ctx.strokeStyle = 'rgba()';
+ctx.stroke();
+```
 
 Math.atan2(y, x);  [3.14， -3.14]

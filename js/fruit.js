@@ -3,6 +3,9 @@ var fruitObj = function() {
   this.orange = new Image();
   this.blue = new Image();
   this.fruitType = [];
+  this.fruitColor = [];
+
+  // this.effectsArr = [];
 
   this.x = [];
   this.y = [];
@@ -27,6 +30,8 @@ fruitObj.prototype.init = function() {
 fruitObj.prototype.draw = function() {
   // console.log('fruit draw');
   var pic;
+  // this.effects();
+
   for (let i = 0; i < this.num; i++) {
     // if (Math.random() < 0.3) {
     //   pic = this.blue;
@@ -35,7 +40,9 @@ fruitObj.prototype.draw = function() {
     // }
     // console.log(this.x[i])
     // console.log(this.y[i])
+    // 存活
     if (this.alive[i]) {
+      // 果实的大小慢慢变大
       if (this.l[i] < 14) {
         this.l[i] = this.l[i] + this.spd[i] * deltaTime;
         if (this.l[i] > 14) {
@@ -45,48 +52,70 @@ fruitObj.prototype.draw = function() {
         this.y[i] -= this.spd[i] * 7 * deltaTime;
       }
       ctx2.drawImage(this.fruitType[i], this.x[i] - this.l[i] * 0.5, this.y[i] - this.l[i] * 0.5, this.l[i], this.l[i]);
-
+      // if (this.fruitColor[i] == 'blue') {
+      //   console.log('blue=========')
+      //   data.double = 2;
+      // }
       if (this.y[i] < 10) {
         this.alive[i] = false;
       }
     }
   }
+
   this.fruitMonitor();
 }
 
 // 每次出生的位置
 fruitObj.prototype.born = function(i) {
   var aneId = Math.floor(Math.random() * ane.num);
+  var random = Math.random();
   this.x[i] = ane.x[aneId];
   this.y[i] = canHeight - ane.len[aneId];
   this.l[i] = 0;
-  this.fruitType[i] = Math.random() < 0.3 ? this.blue : this.orange;
+  this.fruitType[i] = random < 0.3 ? this.blue : this.orange;
+  this.fruitColor[i] = random < 0.3 ? 'blue' : 'orange';
 }
 
 fruitObj.prototype.fruitMonitor = function() {
- var num = 0;
- for (let i = 0; i < this.num; i++) {
-   if (this.alive[i]) {
-     num++;
-   }
- }
- if (num < 15) {
-   this.sendFruit();
- }
+  var num = 0;
+  for (let i = 0; i < this.num; i++) {
+    if (this.alive[i]) {
+      num++;
+    }
+  }
+  if (num < 15) {
+    this.sendFruit();
+  }
 }
 
 fruitObj.prototype.sendFruit = function() {
   let i = 0;
   for (i = 0; i < this.num; i++) {
-     if (!this.alive[i]) {
-       this.alive[i] = true;
-       break;
-     }
+    if (!this.alive[i]) {
+      this.alive[i] = true;
+      break;
+    }
   }
   this.born(i);
 }
 
 fruitObj.prototype.dead = function(i) {
   this.alive[i] = false;
+}
+
+fruitObj.prototype.effects = function() {
+  // ctx2.save();
+  for (let i = 0; i < this.effectsArr.length; i++) {
+    ctx2.beginPath();
+    ctx2.strokeStyle = "blue";
+    ctx2.arc(this.effectsArr[i].x , this.effectsArr[i].y , this.effectsArr[i].r , 0, 2 * Math.PI);
+    ctx2.stroke();
+    this.effectsArr[i].r += deltaTime * 0.01;
+    // console.log('this.effectsArr[i].r', this.effectsArr[i].r);
+    if (this.effectsArr[i].r >= 40) {
+      this.effectsArr.shift()
+    }
+  }
+  // ctx2.restore();
 }
 

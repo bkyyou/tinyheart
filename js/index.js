@@ -13,12 +13,15 @@ let lastTime;
 
 let bgPic = new Image();
 
+let data;
 let ane;
 let fruit;
 let mom;
 let mx;
 let my;
 let baby;
+let wave;
+let halo;
 
 function game() {
   init();
@@ -36,26 +39,34 @@ function init() {
   ctx1 = can1.getContext('2d');
   ctx2 = can2.getContext('2d');
 
-  can1.addEventListener('mousemove', onMouseMove);
+  ctx1.fillStyle = 'white';
+  ctx1.font = '30px Verdana';
+  ctx1.textAlign = 'center'; // center right left
 
+  
   canWidth = can1.width;
   canHeight = can1.height;
-
+  
   mx = canWidth / 2;
   my = canHeight / 2;
-
+  
   bgPic.src = './src/background.jpg';
-
+  
   ane = new aneObj();
   ane.init();
   // bgPic.onload = function() {
-  //   drawBackground();
-  //   // 循环
-  //   ane.draw();
-  // }
-  // 暂时放着；
-  // console.log('this.ane.x', ane.x);
-  
+    //   drawBackground();
+    //   // 循环
+    //   ane.draw();
+    // }
+    // 暂时放着；
+    // console.log('this.ane.x', ane.x);
+    
+  data = new dataObj();
+  data.init();
+
+  can1.addEventListener('mousemove', onMouseMove);
+    
   fruit = new fruitObj();
   fruit.init();
 
@@ -64,13 +75,20 @@ function init() {
 
   baby = new babyObj();
   baby.init();
+
+  wave = new waveObj();
+  wave.init();
+
+  halo = new haloObj();
+  halo.init();
 }
 
 function onMouseMove(e) {
+  if (data.gameOver) return;
   if (e.offsetX || e.layerX) {
     mx = e.offsetX || e.offsetX;
     my = e.offsetY || e.offsetY;
-    console.log('mx', mx, my);
+    // console.log('mx', mx, my);
   }
 }
 
@@ -93,7 +111,10 @@ function gameloop() {
   ctx1.clearRect(0, 0, canWidth, canHeight);
   mom.draw();
 
-  momFruitsCollision()
-
   baby.draw();
+  momFruitsCollision()
+  momBabyCollision();
+  data.draw();
+  wave.draw();
+  halo.draw();
 }

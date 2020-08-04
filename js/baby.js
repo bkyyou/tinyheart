@@ -51,7 +51,7 @@ babyObj.prototype.init = function() {
     this.babyBodyArr[i] = new Image();
     this.babyBodyArr[i].src = `./src/babyFade${i}.png`;
   }
-  console.log('this.babyBodyArr', this.babyBodyArr);
+  // console.log('this.babyBodyArr', this.babyBodyArr);
 }
 
 babyObj.prototype.draw = function() {
@@ -99,17 +99,19 @@ babyObj.prototype.draw = function() {
 
 
   this.babyBodyTimer += deltaTime;
-  console.log('deltaTime', deltaTime);
-  console.log('this.babyBodyTimer', this.babyBodyTimer);
-  if (this.babyBodyTimer > 30) {
+  // console.log('deltaTime', deltaTime);
+  // console.log('this.babyBodyTimer', this.babyBodyTimer);
+  if (this.babyBodyTimer > 300) {
     this.babyBodyCount++;
-    this.babyBodyTimer %= 30;
+    // this.babyBodyTimer %= 30;
+    this.babyBodyTimer = 0;
     if (this.babyBodyCount > 19) {
-      this.babyBodyCount = 0;
+      this.babyBodyCount = 19;
+      data.gameOver = true;
     }
   }
 
-  console.log('this.babyBodyCount', this.babyBodyCount);
+  // console.log('this.babyBodyCount', this.babyBodyCount);
 
   ctx1.save()
   ctx1.translate(this.x, this.y);

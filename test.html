@@ -13,20 +13,29 @@
 </head>
 
 <body>
-  <!-- <canvas id="canvas1" width="1201" height="800">
-  </canvas> -->
+  <canvas id="canvas1" width="1201" height="800">
+  </canvas>
 
-  <div style="position: relative;margin: 20px auto;">
+  <!-- <div style="position: relative;margin: 20px auto;">
     <img class="img1" style="position: absolute;width: 10px;height: 10px;left: 0;top:0px" src="./src/babyEye0.png"
       alt="">
     <img class="img2" style="position: absolute;width: 10px;height: 10px;left: 0;top:0px" src="./src/babyEye1.png"
       alt="">
-  </div>
+  </div> -->
+
+  <!-- <canvas width="400" height="400" id="can"></canvas> -->
   <script>
-    // let can = document.getElementById('canvas1');
-    // let ctx = can.getContext('2d');
-    // let canWidth = can.width;
-    // let canHeight = can.height;
+    let can = document.getElementById('canvas1');
+    let ctx = can.getContext('2d');
+    let canWidth = can.width;
+    let canHeight = can.height;
+
+    ctx.beginPath();
+    ctx.strokeStyle = "blue";
+    // ctx.
+    // ctx.arc(this.effectsArr[i].x , this.effectsArr[i].y , this.effectsArr[i].r , 0, 2*Math.PI);
+    ctx.arc(canWidth / 2, canHeight / 2, 20, 0, 2 * Math.PI);
+    ctx.stroke();
 
     // console.log('canWidth', canWidth);
     // console.log('canHeight', canHeight);
@@ -105,8 +114,8 @@
     // }
     // // fun();
 
-    let img1Dom = document.querySelector('.img1');
-    let img2Dom = document.querySelector('.img2');
+    // let img1Dom = document.querySelector('.img1');
+    // let img2Dom = document.querySelector('.img2');
 
     // setInterval(() => {
     //   img1Dom.style.display = 'none';
@@ -117,24 +126,24 @@
     //   img2Dom.style.display = 'none';
     // }, 200);
 
-    let timeArr = [2000, 200];
-    let timeCount = 0;
+    // let timeArr = [2000, 200];
+    // let timeCount = 0;
 
-    function inter() {
-      setTimeout(() => {
-        timeCount = ++timeCount % 2;
-        if (timeCount == 0) {
-          img1Dom.style.display = 'block';
-          img2Dom.style.display = 'none';
-        } else {
-          img1Dom.style.display = 'none';
-          img2Dom.style.display = 'block';
-        }
-        inter();
-      }, timeArr[timeCount]);
-    }
+    // function inter() {
+    //   setTimeout(() => {
+    //     timeCount = ++timeCount % 2;
+    //     if (timeCount == 0) {
+    //       img1Dom.style.display = 'block';
+    //       img2Dom.style.display = 'none';
+    //     } else {
+    //       img1Dom.style.display = 'none';
+    //       img2Dom.style.display = 'block';
+    //     }
+    //     inter();
+    //   }, timeArr[timeCount]);
+    // }
 
-    inter();
+    // inter();
 
   </script>
 </body>

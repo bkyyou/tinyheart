@@ -8,11 +8,30 @@
 <body>
   <canvas id="c" width="200" height="200"></canvas>
   <script>
-    var c = document.getElementById('c');
-    var ctx = c.getContext('2d');
-    var img = new Image();
-    img.src
-    ctx.drawImage()
+    // var c = document.getElementById('c');
+    // var ctx = c.getContext('2d');
+    // var img = new Image();
+    // img.src
+    // ctx.drawImage()
+
+    async function fun1() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          console.log(1111)
+          // return 1;
+          resolve(11111)
+        }, 1000);
+      })
+    }
+
+    async function fun2() {
+      await fun1();
+      console.log(2222)
+    }
+
+    fun2();
+
+
   </script>
 </body>
 </html>

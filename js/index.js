@@ -22,6 +22,7 @@ let my;
 let baby;
 let wave;
 let halo;
+let dust;
 
 function game() {
   init();
@@ -81,6 +82,9 @@ function init() {
 
   halo = new haloObj();
   halo.init();
+
+  dust = new dustObj();
+  dust.init();
 }
 
 function onMouseMove(e) {
@@ -117,4 +121,5 @@ function gameloop() {
   data.draw();
   wave.draw();
   halo.draw();
+  dust.draw();
 }

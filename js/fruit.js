@@ -11,6 +11,8 @@ var fruitObj = function() {
   this.y = [];
   this.l = [];
   this.spd = [];
+  this.aneId = [];
+  this.first = [];
 }
 
 fruitObj.prototype.num = 30;
@@ -22,6 +24,7 @@ fruitObj.prototype.init = function() {
     this.y[i] = 0;
     this.spd[i] = Math.random() * 0.01 + 0.005; // [0.01, 0.015)
     this.born(i);
+    this.first[i] = true;
   }
   this.orange.src = './src/fruit.png'
   this.blue.src = './src/blue.png'
@@ -48,16 +51,25 @@ fruitObj.prototype.draw = function() {
         if (this.l[i] > 14) {
           this.l[i] = 14;
         }
+        ctx2.drawImage(this.fruitType[i], ane.currentx[this.aneId[i]] - this.l[i] * 0.5, this.y[i] - this.l[i] * 0.5, this.l[i], this.l[i]);
+        this.x[i] = ane.currentx[this.aneId[i]] - this.l[i] * 0.5;
+
       } else {
         this.y[i] -= this.spd[i] * 7 * deltaTime;
+        if (this.first[i]) {
+          // this.x[i] = ane.currentx[this.aneId[i]] - this.l[i] * 0.5;
+        }
+        this.first[i] = false;
+        ctx2.drawImage(this.fruitType[i], this.x[i], this.y[i] - this.l[i] * 0.5, this.l[i], this.l[i]);
+        // ctx2.drawImage(this.fruitType[i], ane.currentx[this.aneId[i]] - this.l[i] * 0.5, this.y[i] - this.l[i] * 0.5, this.l[i], this.l[i]);
       }
-      ctx2.drawImage(this.fruitType[i], this.x[i] - this.l[i] * 0.5, this.y[i] - this.l[i] * 0.5, this.l[i], this.l[i]);
       // if (this.fruitColor[i] == 'blue') {
       //   console.log('blue=========')
       //   data.double = 2;
       // }
       if (this.y[i] < 10) {
         this.alive[i] = false;
+        this.first[i] = true;
       }
     }
   }
@@ -69,9 +81,11 @@ fruitObj.prototype.draw = function() {
 fruitObj.prototype.born = function(i) {
   var aneId = Math.floor(Math.random() * ane.num);
   var random = Math.random();
-  this.x[i] = ane.x[aneId];
-  this.y[i] = canHeight - ane.len[aneId];
+  // this.x[i] = ane.x[aneId];
+  this.x[i] = ane.currentx[aneId];
+  this.y[i] = ane.heady[aneId];
   this.l[i] = 0;
+  this.aneId[i] = aneId;
   this.fruitType[i] = random < 0.3 ? this.blue : this.orange;
   this.fruitColor[i] = random < 0.3 ? 'blue' : 'orange';
 }
@@ -108,7 +122,7 @@ fruitObj.prototype.effects = function() {
   for (let i = 0; i < this.effectsArr.length; i++) {
     ctx2.beginPath();
     ctx2.strokeStyle = "blue";
-    ctx2.arc(this.effectsArr[i].x , this.effectsArr[i].y , this.effectsArr[i].r , 0, 2 * Math.PI);
+    ctx2.arc(this.effectsArr[i].x, this.effectsArr[i].y, this.effectsArr[i].r, 0, 2 * Math.PI);
     ctx2.stroke();
     this.effectsArr[i].r += deltaTime * 0.01;
     // console.log('this.effectsArr[i].r', this.effectsArr[i].r);

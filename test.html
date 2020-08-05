@@ -7,7 +7,7 @@
   <title>Document</title>
   <style>
     body {
-      background-color: red;
+      /* background-color: red; */
     }
   </style>
 </head>
@@ -25,17 +25,17 @@
 
   <!-- <canvas width="400" height="400" id="can"></canvas> -->
   <script>
-    let can = document.getElementById('canvas1');
-    let ctx = can.getContext('2d');
-    let canWidth = can.width;
-    let canHeight = can.height;
+    // let can = document.getElementById('canvas1');
+    // let ctx = can.getContext('2d');
+    // let canWidth = can.width;
+    // let canHeight = can.height;
 
-    ctx.beginPath();
-    ctx.strokeStyle = "blue";
-    // ctx.
-    // ctx.arc(this.effectsArr[i].x , this.effectsArr[i].y , this.effectsArr[i].r , 0, 2*Math.PI);
-    ctx.arc(canWidth / 2, canHeight / 2, 20, 0, 2 * Math.PI);
-    ctx.stroke();
+    // ctx.beginPath();
+    // ctx.strokeStyle = "blue";
+    // // ctx.
+    // // ctx.arc(this.effectsArr[i].x , this.effectsArr[i].y , this.effectsArr[i].r , 0, 2*Math.PI);
+    // ctx.arc(canWidth / 2, canHeight / 2, 20, 0, 2 * Math.PI);
+    // ctx.stroke();
 
     // console.log('canWidth', canWidth);
     // console.log('canHeight', canHeight);
@@ -144,6 +144,15 @@
     // }
 
     // inter();
+
+    var deltaTime = 16;
+    var curvature = 0;
+
+   setInterval(() => {
+    curvature += deltaTime * 0.008;
+    var l = Math.sin(curvature);
+    console.log('l', l);
+   }, 1000);
 
   </script>
 </body>
